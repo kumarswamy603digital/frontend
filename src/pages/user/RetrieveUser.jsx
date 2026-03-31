@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -11,18 +11,18 @@ const RetrieveUser = () => {
 
   const [user, setUser] = useState({});
 
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     try {
       const user = await userService.retrieveUser(userId);
       setUser(user);
     } catch (err) {
       setUser(null);
     }
-  };
+  }, [userId]);
 
   useEffect(() => {
     fetchUser();
-  }, [userId]);
+  }, [fetchUser]);
 
   return (
     <Layout>

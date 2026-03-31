@@ -1,7 +1,7 @@
 import Layout from "../../components/layout/Layout";
 import { firstUpperCase } from "../../helpers/string.helper";
 import * as userService from "../../services/user.service";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { NavLink, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,7 +15,7 @@ const EditUser = () => {
   const [country, setCountry] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const populateUserFields = async () => {
+  const populateUserFields = useCallback(async () => {
     try {
       const user = await userService.retrieveUser(userId);
       setName(user.name);
@@ -26,7 +26,7 @@ const EditUser = () => {
       console.error(err.message);
       window.location.href = "/";
     }
-  };
+  }, [userId]);
 
   const submitForm = async (event) => {
     event.preventDefault();
@@ -68,7 +68,7 @@ const EditUser = () => {
 
   useEffect(() => {
     populateUserFields();
-  }, [userId]);
+  }, [populateUserFields]);
 
   return (
     <Layout>
