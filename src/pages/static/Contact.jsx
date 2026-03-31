@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 const Contact = () => {
   const [isCopying, setIsCopying] = useState(false);
-  const CONTACT_EMAIL = "MY EMAIL ADDRESS";
+  const CONTACT_EMAIL = "kumarswamyry789@gmail.com";
 
   const copyEmail = async () => {
     try {
@@ -13,7 +13,7 @@ const Contact = () => {
       await navigator.clipboard.writeText(CONTACT_EMAIL);
       toast.success("Email copied to clipboard.");
     } catch (e) {
-      toast.info("Copy manually: MY EMAIL ADDRESS");
+      toast.info("Copy manually: kumarswamyry789@gmail.com");
     } finally {
       setIsCopying(false);
     }
